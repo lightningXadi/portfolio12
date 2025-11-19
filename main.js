@@ -145,3 +145,28 @@ document.addEventListener("DOMContentLoaded", () => {
     mainPage.classList.add("visible");
   }, 4000);
 });
+
+// FORM REDIRECT FIX
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+        });
+
+        if (response.ok) {
+            window.location.href = "thankyou.html"; 
+        } else {
+            alert("Message failed to send.");
+        }
+    });
+}
+
+
